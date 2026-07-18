@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiheon Lim — CV</title>
+  <meta name="description" content="Curriculum vitae of Kiheon Lim — HKUST Electronic Engineering; hardware-aware neural networks and RTL design." />
+  <meta name="theme-color" content="#0E7C86" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <style>
+    .cv { padding-top:48px; }
+    .cv-head h1 { font-size:clamp(30px,6vw,42px); margin:8px 0 8px; letter-spacing:-.01em; }
+    .cv-contact { font-family:var(--mono); font-size:13px; color:var(--muted); display:flex; flex-wrap:wrap; gap:4px 18px; }
+    .cv-contact a { color:var(--muted); }
+    .cv-contact a:hover { color:var(--accent); }
+    .cv-actions { display:flex; gap:10px; margin:22px 0 8px; flex-wrap:wrap; }
+    .cv-actions a { font-family:var(--mono); font-size:13px; border:1px solid var(--rule); border-radius:6px; padding:9px 15px; color:var(--ink); }
+    .cv-actions a.primary { border-color:var(--accent); color:var(--accent); }
+    .cv-actions a:hover { border-color:var(--accent); color:var(--accent); }
+    .cv-sec { margin-top:36px; }
+    .cv-sec > h2 { font-size:15px; font-family:var(--mono); text-transform:uppercase; letter-spacing:.12em; color:var(--accent); margin:0 0 14px; padding-bottom:8px; border-bottom:1px solid var(--rule); }
+    .cv-item { margin-bottom:20px; }
+    .cv-row { display:flex; justify-content:space-between; gap:16px; align-items:baseline; }
+    .cv-title { font-family:var(--serif); font-weight:600; font-size:17px; }
+    .cv-date { font-family:var(--mono); font-size:12.5px; color:var(--faint); white-space:nowrap; }
+    .cv-sub { font-size:14px; color:var(--muted); margin:1px 0 6px; }
+    .cv-item ul { margin:6px 0 0; padding-left:18px; }
+    .cv-item li { margin-bottom:4px; font-size:14.5px; }
+    .cv-skills div { margin-bottom:6px; font-size:14.5px; }
+    .cv-skills b { font-family:var(--mono); font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+    @media print {
+      @page { size:A4; margin:14mm 15mm; }
+      .cv { padding-top:0; }
+      .cv-actions { display:none; }
+      .cv-sec { margin-top:20px; page-break-inside:avoid; }
+      .cv-item { margin-bottom:12px; }
+      body { font-size:10.5pt; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-home" href="/"><span class="back">←</span>Kiheon Lim</a>
+      <div class="nav-ctrl">
+        <button id="themeBtn" type="button" aria-label="Toggle light or dark theme">theme</button>
+        <button id="printBtn" type="button" aria-label="Print or save as PDF">print</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <section class="cv">
+      <header class="cv-head">
+        <div class="eyebrow">Curriculum Vitae</div>
+        <h1>Jason Kiheon&nbsp;Lim</h1>
+        <div class="cv-contact">
+          <a href="mailto:kiheon2004@gmail.com">kiheon2004@gmail.com</a>
+          <span>+852 9814 0062</span>
+          <span>Hong Kong</span>
+          <a href="https://github.com/jkhlim125">github.com/jkhlim125</a>
+          <a href="https://www.linkedin.com/in/kiheon-lim-67a047383">LinkedIn</a>
+        </div>
+        <div class="cv-actions">
+          <a class="primary" href="/Kiheon_Lim_CV.pdf" target="_blank" rel="noopener">Open PDF ↗</a>
+          <a href="/Kiheon_Lim_CV.pdf" download>Download PDF ↓</a>
+        </div>
+      </header>
+
+      <div class="cv-sec">
+        <h2>Education</h2>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">Hong Kong University of Science and Technology (HKUST)</span><span class="cv-date">Sep 2022 – Jun 2028</span></div>
+          <div class="cv-sub">B.Eng. in Electronic Engineering · Hong Kong · GPA 3.42 / 4.30</div>
+          <ul>
+            <li>Honors: Dean's List (2025–26 Fall) · Full Admission Scholarship (2022 – present)</li>
+            <li>Relevant coursework: Computer Organization &amp; Design · Programming with C++ · Signals &amp; Communications · Electronic Circuits · Matrix Algebra · Multivariable Calculus</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-sec">
+        <h2>Research Experience</h2>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">HKUST UROP1100 — Hardware-Efficient LUT Neural Networks on FPGA</span><span class="cv-date">Feb 2026 – Present</span></div>
+          <div class="cv-sub">Undergraduate Researcher · Advisor: Prof. Wei Zhang · Hong Kong</div>
+          <ul>
+            <li>Analyzed a PyTorch LUT-CNN training/pruning pipeline (similarity-based pairing, BIB regularization, sensitivity pruning) and fixed a threshold-tie pruning bug restoring exact sparsity control (682 → 691 of target).</li>
+            <li>Ran 40+ training runs across sparsity / packing configurations; characterized the accuracy–hardware frontier (Spearman ρ = −0.96), reaching up to ~86% pin / ~81% slice reduction.</li>
+            <li>Ported the workflow to RadioML 1-D IQ classification with bitplane preprocessing and custom LUTConv1d operators; a pruning-first staged schedule held 40% vs 29% accuracy through full hardening.</li>
+            <li>Built failure-analysis tooling (class/SNR breakdowns, confusion, confidence-margin) diagnosing structured error modes.</li>
+          </ul>
+        </div>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">HKUST UROP1000 — Open-Source Digital IC Design Flow</span><span class="cv-date">Jun 2023 – Sep 2023</span></div>
+          <div class="cv-sub">Undergraduate Researcher · Hong Kong</div>
+          <ul>
+            <li>Designed Verilog FSM architectures (clocked adder, finite-state-machine digital lock) for an open-source digital IC project.</li>
+            <li>Took an RTL-to-GDS design through synthesis and place-and-route on the Tiny Tapeout platform.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-sec">
+        <h2>Projects</h2>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">Systolic Array Accelerator</span><span class="cv-date">Verilog + Python</span></div>
+          <div class="cv-sub">4×4 array with cycle-level trace visualization; measured 13 vs 12-cycle control overhead.</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">LUT vs MAC Inference Pipeline (RTL)</span><span class="cv-date">Verilog</span></div>
+          <div class="cv-sub">Controlled datapath comparison with event-based latency; LUT 4 / MAC 5 cycles across all 18 runs.</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">Constraint-Aware Hardware Design Tool</span><span class="cv-date">Deployed web app</span></div>
+          <div class="cv-sub">Constraint-first decision system: feasibility filter → Pareto reduction → explainable recommendation (Streamlit).</div>
+        </div>
+      </div>
+
+      <div class="cv-sec">
+        <h2>Extracurricular &amp; Certifications</h2>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">GE Aerospace Job Simulation (Forage)</span><span class="cv-date">Jan 2026</span></div>
+          <div class="cv-sub">Developed verification procedures for system reliability under environmental stress; built a signal-flow-based troubleshooting framework.</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">HKUST Korean Student Association Basketball Team</span><span class="cv-date">Sep 2022 – Present</span></div>
+          <div class="cv-sub">Vice-Captain — led practices and coordinated logistics for the SKETCH HK Korean Basketball League.</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">POSTECH Science &amp; Engineering Ideathon</span><span class="cv-date">Jun 2022</span></div>
+          <div class="cv-sub">Participant &amp; Awardee — "Most Creative and Extensive Idea" for an AI infant-monitoring concept.</div>
+        </div>
+      </div>
+
+      <div class="cv-sec">
+        <h2>Military Service</h2>
+        <div class="cv-item">
+          <div class="cv-row"><span class="cv-title">Republic of Korea Army — Capital Defense Command</span><span class="cv-date">Jan 2024 – Jul 2025</span></div>
+          <div class="cv-sub">Supply Specialist, 1st Security Battalion · Seoul, Korea</div>
+          <ul>
+            <li>Managed logistics and equipment supply for a battalion defending core areas of the capital; coordinated inventory tracking and distribution to maintain operational readiness.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-sec cv-skills">
+        <h2>Skills</h2>
+        <div><b>Languages</b> — English (native) · Korean (native) · Mandarin (intermediate)</div>
+        <div><b>Technical</b> — C++ · Python · Verilog HDL · PyTorch · GTKWave</div>
+        <div><b>Systems &amp; hardware</b> — FPGA · pipeline design · latency analysis · model pruning</div>
+        <div><b>Tools</b> — Linux · Git · Streamlit · Plotly · NumPy</div>
+      </div>
+
+      <footer class="site">Kiheon Lim · CV · <a href="/">portfolio home</a></footer>
+    </section>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>

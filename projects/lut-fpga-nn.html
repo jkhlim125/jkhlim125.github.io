@@ -15,7 +15,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a class="nav-home" href="/"><span class="back">←</span>Kiheon Lim</a>
-      <div class="nav-ctrl">
+      <div class="nav-ctrl"><a class="navlink" href="/cv.html">CV</a>
         <button id="themeBtn" type="button" aria-label="Toggle light or dark theme">theme</button>
         <button id="printBtn" type="button" aria-label="Save as PDF">save PDF</button>
       </div>
@@ -44,6 +44,10 @@
     <figure>
       <img class="fig-img" src="/assets/cifar_pareto.jpg" alt="Pareto frontier of maximum test accuracy versus pin reduction; the green pruning-prepared frontier stays above the blue naive baseline across the whole range" />
       <figcaption>Green (pruning + pairing prepared) sits above blue (naive baseline) everywhere — same hardware saving, more accuracy retained.</figcaption>
+    </figure>
+    <figure>
+      <img class="fig-img" src="/assets/cifar_acc_drop.jpg" alt="Accuracy drop from baseline versus pin reduction rate; the drop stays near zero up to ~80% pin reduction, then rises sharply, with Spearman rho 0.959" />
+      <figcaption>The cost curve: accuracy drop stays near zero up to ~80% pin reduction, then rises sharply (ρ = +0.96) — there's a wide "free" region before pruning starts to hurt.</figcaption>
     </figure>
 
     <h2>Part B — RadioML 1-D IQ</h2>

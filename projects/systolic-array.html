@@ -15,7 +15,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a class="nav-home" href="/"><span class="back">←</span>Kiheon Lim</a>
-      <div class="nav-ctrl">
+      <div class="nav-ctrl"><a class="navlink" href="/cv.html">CV</a>
         <button id="themeBtn" type="button" aria-label="Toggle light or dark theme">theme</button>
         <button id="printBtn" type="button" aria-label="Save as PDF">save PDF</button>
       </div>
@@ -43,6 +43,17 @@
       <img class="fig-img" src="/assets/systolic_wave.jpg" alt="Heatmap of MAC activity across the 16 processing elements over run-local cycles, showing a diagonal wavefront through the 4x4 array" />
       <figcaption>MAC activity sweeps diagonally across the 16 PEs — the signature of correct systolic dataflow, reconstructed from <code>data/trace.csv</code>.</figcaption>
     </figure>
+
+    <div class="fig-2">
+      <figure style="margin:0;">
+        <img class="fig-img" src="/assets/systolic_fsm.jpg" alt="Controller FSM state over run-local cycles, stepping IDLE, LOAD, STREAM, DRAIN, COLLECT, DONE" />
+        <figcaption>Controller FSM: <code>IDLE→LOAD→STREAM→DRAIN→COLLECT→DONE</code> over one run.</figcaption>
+      </figure>
+      <figure style="margin:0;">
+        <img class="fig-img" src="/assets/systolic_psum.jpg" alt="Partial-sum evolution inside one processing element, accumulating only when both inputs are valid and settling to its final value" />
+        <figcaption>Partial-sum accumulation inside one PE — only when both operands are valid.</figcaption>
+      </figure>
+    </div>
 
     <p style="margin-top:24px;font-family:var(--mono);font-size:13px;">Code — <a href="https://github.com/jkhlim125/Systolic-Array-Accelerator">Systolic-Array-Accelerator</a></p>
 
