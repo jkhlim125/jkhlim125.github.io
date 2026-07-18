@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open-source digital IC flow (UROP1000) — Kiheon Lim</title>
+  <meta name="description" content="Verilog FSMs taken through an RTL-to-GDS flow on Tiny Tapeout — first hands-on exposure to the full hardware pipeline." />
+  <meta name="theme-color" content="#0E7C86" />
+  <meta property="og:title" content="Open-source digital IC flow (UROP1000)" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-home" href="/"><span class="back">←</span>Kiheon Lim</a>
+      <div class="nav-ctrl">
+        <button id="themeBtn" type="button" aria-label="Toggle light or dark theme">theme</button>
+        <button id="printBtn" type="button" aria-label="Save as PDF">save PDF</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap content">
+    <header class="proj-header">
+      <div class="eyebrow">Project 05 · UROP1000</div>
+      <h1>Open-source digital IC design flow</h1>
+      <p class="lede">Verilog HDL · RTL-to-GDS · Tiny Tapeout</p>
+    </header>
+
+    <p>An earlier undergraduate research project and the foundation for the RTL work above. I designed FSM-based logic (a clocked adder and a finite-state-machine digital lock) in Verilog, then took an RTL-to-GDS design through synthesis and place-and-route on the <strong>Tiny Tapeout</strong> platform — first hands-on exposure to the full open-source hardware flow, from HDL down to a physical layout.</p>
+
+    <div class="proj-specs"><span>HDL <b>Verilog</b></span><span>Flow <b>RTL → synthesis → P&amp;R → GDS</b></span><span>Platform <b>Tiny Tapeout</b></span></div>
+
+    <p>The exposure to synthesis and place-and-route here is what made the later systolic-array and LUT/MAC projects legible to me at the hardware level — not just as RTL, but as something that maps onto real logic and timing.</p>
+
+    <div class="prevnext">
+      <a href="/projects/decision-tool.html">← Prev: Design-space tool</a>
+      <a href="/">Back to all projects →</a>
+    </div>
+    <footer class="site">Kiheon Lim · Engineering Portfolio · <a href="/">home</a></footer>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>

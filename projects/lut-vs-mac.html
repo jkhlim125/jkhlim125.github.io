@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUT vs MAC inference pipeline — Kiheon Lim</title>
+  <meta name="description" content="A controlled RTL comparison of LUT vs MAC inference datapaths, isolating one register with event-based latency measurement." />
+  <meta name="theme-color" content="#0E7C86" />
+  <meta property="og:title" content="LUT vs MAC inference pipeline" />
+  <meta property="og:description" content="LUT 4 / MAC 5 cycles, the same +1 across all 18 runs, traceable to one register." />
+  <link rel="stylesheet" href="/styles.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-home" href="/"><span class="back">←</span>Kiheon Lim</a>
+      <div class="nav-ctrl">
+        <button id="themeBtn" type="button" aria-label="Toggle light or dark theme">theme</button>
+        <button id="printBtn" type="button" aria-label="Save as PDF">save PDF</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap content">
+    <header class="proj-header">
+      <div class="eyebrow">Project 03 · Verilog</div>
+      <h1>LUT vs MAC inference pipeline</h1>
+      <p class="lede">Verilog · controlled datapath comparison · event-based latency</p>
+    </header>
+
+    <p>Two inference datapaths in RTL — LUT-based and MAC-based — processing the same input under identical control, so the only variable is the datapath. Latency is read from real signal events (<code>out_valid</code> rising edge minus <code>in_valid</code>), not assumed pipeline depth.</p>
+
+    <div class="results">
+      <div class="r key"><div class="v">4<span class="u"> cyc</span></div><div class="l">LUT path — combinational mapping</div></div>
+      <div class="r"><div class="v">5<span class="u"> cyc</span></div><div class="l">MAC path — one extra registered stage</div></div>
+      <div class="r"><div class="v">18/18</div><div class="l">Runs showing the identical +1 cycle</div></div>
+    </div>
+
+    <p>The same +1 across all 18 runs, traceable to exactly one pipeline register in the MAC scoring datapath. A small result, but a cleanly controlled and verified one — and a demonstration that latency has to be <em>measured</em> from real events, not inferred from designed depth.</p>
+
+    <figure>
+      <img class="fig-img" src="/assets/lutmac_latency.png" alt="GTKWave capture showing latency_lut settling to 4 and latency_mac to 5, with out_valid_lut asserting one cycle before out_valid_mac" />
+      <figcaption>Event-based measurement: <code>latency_lut = 4</code>, <code>latency_mac = 5</code> — the MAC's <code>out_valid</code> lands one cycle later.</figcaption>
+    </figure>
+
+    <p style="margin-top:24px;font-family:var(--mono);font-size:13px;">Code — <a href="https://github.com/jkhlim125/LUT-vs-MAC-Pipeline-RTL-Comparison">LUT-vs-MAC-Pipeline-RTL-Comparison</a></p>
+
+    <div class="prevnext">
+      <a href="/projects/systolic-array.html">← Prev: Systolic array</a>
+      <a href="/projects/decision-tool.html">Next: Design-space tool →</a>
+    </div>
+    <footer class="site">Kiheon Lim · Engineering Portfolio · <a href="/">home</a></footer>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>

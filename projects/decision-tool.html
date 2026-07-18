@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constraint-aware design-space tool — Kiheon Lim</title>
+  <meta name="description" content="A deployed Streamlit tool that turns experiment/RTL outputs into design decisions: feasibility filter → Pareto → explainable recommendation." />
+  <meta name="theme-color" content="#0E7C86" />
+  <meta property="og:title" content="Constraint-aware design-space tool" />
+  <meta property="og:description" content="Deployed constraint-first decision dashboard: feasibility → Pareto → recommendation → sensitivity." />
+  <link rel="stylesheet" href="/styles.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-home" href="/"><span class="back">←</span>Kiheon Lim</a>
+      <div class="nav-ctrl">
+        <button id="themeBtn" type="button" aria-label="Toggle light or dark theme">theme</button>
+        <button id="printBtn" type="button" aria-label="Save as PDF">save PDF</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap content">
+    <header class="proj-header">
+      <div class="eyebrow">Project 04 · Streamlit</div>
+      <h1>Constraint-aware design-space tool</h1>
+      <p class="lede">Python · Streamlit · pandas — turns experiment/RTL outputs into design decisions</p>
+    </header>
+
+    <p>A workflow that reflects how hardware decisions are actually made: it filters infeasible configurations <strong>first</strong>, reduces the rest to a Pareto frontier, then gives an explainable recommendation and a sensitivity sweep — constraint-first, not blind scoring. Dominance is exact: no worse on every objective, strictly better on at least one. It ingests heterogeneous inputs (CSV / JSON / RTL-derived) into one candidate schema and stays robust to missing metrics.</p>
+
+    <p style="margin:18px 0;">
+      <a href="https://hardware-aware-neural-network-trade-off-analysis-dashboard-esw.streamlit.app" style="font-family:var(--mono);font-size:14px;border:1px solid var(--accent);border-radius:6px;padding:9px 16px;display:inline-block;">Open the live app →</a>
+    </p>
+
+    <figure>
+      <img class="fig-img" src="/assets/tool_ui.jpg" alt="Screenshot of the deployed Streamlit decision tool showing data input, constraints, and the feasible-candidate view" />
+      <figcaption>The deployed dashboard, shown on sample data: data input → constraints → feasibility filter → Pareto → recommendation → sensitivity. (Bundled sample data is synthetic and illustrative — point it at real experiment/RTL outputs for real analysis.)</figcaption>
+    </figure>
+
+    <p style="margin-top:24px;font-family:var(--mono);font-size:13px;">Code — <a href="https://github.com/jkhlim125/Hardware-Decision-Analytics-Tool">Hardware-Decision-Analytics-Tool</a></p>
+
+    <div class="prevnext">
+      <a href="/projects/lut-vs-mac.html">← Prev: LUT vs MAC pipeline</a>
+      <a href="/projects/foundation.html">Next: Foundation (UROP1000) →</a>
+    </div>
+    <footer class="site">Kiheon Lim · Engineering Portfolio · <a href="/">home</a></footer>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>

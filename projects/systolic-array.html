@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systolic array accelerator — Kiheon Lim</title>
+  <meta name="description" content="A 4×4 systolic array in Verilog built for observability — the systolic wavefront reconstructed from a cycle-level trace." />
+  <meta name="theme-color" content="#0E7C86" />
+  <meta property="og:title" content="Systolic array accelerator" />
+  <meta property="og:description" content="4×4 Verilog array with cycle-level trace observability; 13 vs 12 cycle overhead measured." />
+  <link rel="stylesheet" href="/styles.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-home" href="/"><span class="back">←</span>Kiheon Lim</a>
+      <div class="nav-ctrl">
+        <button id="themeBtn" type="button" aria-label="Toggle light or dark theme">theme</button>
+        <button id="printBtn" type="button" aria-label="Save as PDF">save PDF</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap content">
+    <header class="proj-header">
+      <div class="eyebrow">Project 02 · Verilog</div>
+      <h1>Systolic array accelerator</h1>
+      <p class="lede">Verilog + Python · 4×4 array · VCD + trace verification</p>
+    </header>
+
+    <div class="proj-specs"><span>Array <b>4×4</b></span><span>Latency <b>13 vs 12 cyc</b></span><span>Verify <b>VCD + trace.csv</b></span></div>
+    <p>A complete 4×4 systolic array — controller (FSM <code>IDLE→LOAD→STREAM→DRAIN→COLLECT→DONE</code>), input loader, PE mesh, output collector, testbench — built for <strong>observability</strong>: every run emits a cycle-level <code>trace.csv</code> that a Python pipeline turns into behavior plots.</p>
+
+    <div class="results">
+      <div class="r key"><div class="v">13<span class="u"> cyc</span></div><div class="l">Measured latency for the 4×4 array</div></div>
+      <div class="r"><div class="v">12<span class="u"> cyc</span></div><div class="l">Theoretical — the extra cycle is control overhead, measured not assumed</div></div>
+    </div>
+
+    <p>Correctness shows up directly in the trace: the per-PE MAC-fire mask advances diagonally (<code>0001 → 0013 → 0137 → 137f → 37fe → 7fec → fec8 …</code>), i.e. the systolic wavefront sweeping across the array. Each PE gates accumulation on operand validity (<code>enable &amp;&amp; a_valid &amp;&amp; b_valid</code>), so only aligned data contributes.</p>
+
+    <figure>
+      <img class="fig-img" src="/assets/systolic_wave.jpg" alt="Heatmap of MAC activity across the 16 processing elements over run-local cycles, showing a diagonal wavefront through the 4x4 array" />
+      <figcaption>MAC activity sweeps diagonally across the 16 PEs — the signature of correct systolic dataflow, reconstructed from <code>data/trace.csv</code>.</figcaption>
+    </figure>
+
+    <p style="margin-top:24px;font-family:var(--mono);font-size:13px;">Code — <a href="https://github.com/jkhlim125/Systolic-Array-Accelerator">Systolic-Array-Accelerator</a></p>
+
+    <div class="prevnext">
+      <a href="/projects/lut-fpga-nn.html">← Prev: LUT neural networks</a>
+      <a href="/projects/lut-vs-mac.html">Next: LUT vs MAC pipeline →</a>
+    </div>
+    <footer class="site">Kiheon Lim · Engineering Portfolio · <a href="/">home</a></footer>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>
