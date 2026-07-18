@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiheon Lim</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #1a1a1a;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #5b5bd6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0d10;
+        --fg: #eaeaec;
+        --muted: #9ca3af;
+        --line: #26262c;
+        --accent: #8b8bf0;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    main { width: 100%; max-width: 640px; }
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
+    .tagline { font-size: 1.1rem; color: var(--muted); margin-top: 12px; }
+    .divider { height: 1px; background: var(--line); margin: 32px 0; border: 0; }
+    p { color: var(--fg); }
+    .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .links a {
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .links a:hover { border-color: var(--accent); transform: translateY(-1px); }
+    footer { margin-top: 48px; font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Kiheon Lim &middot; 임기헌</div>
+    <h1>안녕하세요.</h1>
+    <p class="tagline">전자공학을 공부하고, 로봇·AI 인프라를 만드는 사람입니다.</p>
+    <hr class="divider" />
+    <p>
+      HKUST 전자컴퓨터공학, RLWRLD 기술 전략.
+      하드웨어부터 배포까지 — 이해하고, 직접 만들어 세상에 올립니다.
+    </p>
+    <div class="links">
+      <a href="https://github.com/jkhlim125">GitHub</a>
+      <a href="mailto:jason.lim@rlwrld.ai">Email</a>
+    </div>
+    <footer>이 페이지는 GitHub Pages로 배포되었습니다.</footer>
+  </main>
+</body>
+</html>
