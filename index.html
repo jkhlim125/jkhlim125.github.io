@@ -1,82 +1,301 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kiheon Lim</title>
+  <title>Kiheon Lim — Engineering Portfolio</title>
+  <meta name="description" content="Kiheon Lim — HKUST Electronic Engineering. Hardware-aware systems: LUT/FPGA neural networks, RTL accelerators, and cycle-level measurement." />
+  <meta name="author" content="Kiheon Lim" />
+  <meta name="theme-color" content="#0E7C86" />
+  <meta property="og:title" content="Kiheon Lim — Engineering Portfolio" />
+  <meta property="og:description" content="Hardware-aware systems: LUT/FPGA neural networks, RTL accelerators, and cycle-level measurement." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jkhlim125.github.io/" />
   <style>
+  :root {
+    --paper:#F5F6F7; --surface:#FFFFFF; --ink:#17191D; --muted:#565D65;
+    --faint:#878E96; --rule:#DBDFE3; --accent:#0E7C86; --accent-soft:#E4F0F1;
+    --serif:'Charter','Iowan Old Style','Palatino Linotype',Georgia,'Times New Roman',serif;
+    --sans:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'SF Mono','JetBrains Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #ffffff;
-      --fg: #1a1a1a;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --accent: #5b5bd6;
+      --paper:#0F1113; --surface:#16191C; --ink:#E7E9EB; --muted:#9AA1A8;
+      --faint:#6C737B; --rule:#262A2F; --accent:#38B2BD; --accent-soft:#122F34;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0d0d10;
-        --fg: #eaeaec;
-        --muted: #9ca3af;
-        --line: #26262c;
-        --accent: #8b8bf0;
-      }
+  }
+  :root[data-theme="light"] {
+    --paper:#F5F6F7; --surface:#FFFFFF; --ink:#17191D; --muted:#565D65;
+    --faint:#878E96; --rule:#DBDFE3; --accent:#0E7C86; --accent-soft:#E4F0F1;
+  }
+  :root[data-theme="dark"] {
+    --paper:#0F1113; --surface:#16191C; --ink:#E7E9EB; --muted:#9AA1A8;
+    --faint:#6C737B; --rule:#262A2F; --accent:#38B2BD; --accent-soft:#122F34;
+  }
+
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:800px; margin:0 auto; padding:72px 28px 96px; }
+
+  h1,h2,h3 { font-family:var(--serif); font-weight:600; text-wrap:balance; line-height:1.18; }
+  .eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  p { margin:0 0 1em; }
+  a { color:var(--accent); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+  a:hover { border-bottom-color:var(--accent); }
+  a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  strong { font-weight:650; }
+  em { font-style:italic; }
+
+  header.masthead h1 { font-size:40px; margin:6px 0 6px; letter-spacing:-.01em; }
+  .tagline { font-size:19px; color:var(--muted); font-family:var(--serif); font-style:italic; margin:0 0 20px; max-width:60ch; }
+  .focus-line { font-family:var(--mono); font-size:13px; color:var(--ink); background:var(--accent-soft); border-left:2px solid var(--accent); padding:10px 14px; margin:0 0 30px; border-radius:0 3px 3px 0; }
+  .meta { display:flex; flex-wrap:wrap; gap:6px 22px; font-family:var(--mono); font-size:13px; color:var(--muted); padding-top:16px; border-top:1px solid var(--rule); }
+  .meta a { color:var(--muted); border-bottom-color:transparent; }
+  .meta a:hover { color:var(--accent); }
+
+  section { padding-top:44px; margin-top:44px; border-top:1px solid var(--rule); }
+  section.featured { border-top:2px solid var(--ink); }
+  .sec-head { display:flex; align-items:baseline; gap:14px; margin-bottom:6px; }
+  .sec-no { font-family:var(--mono); font-size:13px; color:var(--faint); font-weight:600; flex:none; width:2.4em; }
+  h2 { font-size:27px; margin:0; }
+  h3 { font-size:17px; margin:34px 0 8px; color:var(--ink); }
+  h3 .k { font-family:var(--mono); font-size:12px; color:var(--accent); text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:2px; font-weight:600; }
+  .lede { color:var(--muted); font-size:15px; font-family:var(--mono); margin:2px 0 0 calc(2.4em + 14px); }
+  .body-col { margin-left:calc(2.4em + 14px); }
+  @media (max-width:620px){ .lede,.body-col{ margin-left:0; } .sec-head{ gap:10px; } }
+
+  .tbl-scroll { overflow-x:auto; margin:16px 0 6px; }
+  table { border-collapse:collapse; width:100%; font-size:14px; }
+  th,td { text-align:left; padding:7px 14px 7px 0; border-bottom:1px solid var(--rule); white-space:nowrap; }
+  th { font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; }
+  td { font-family:var(--mono); color:var(--ink); font-variant-numeric:tabular-nums; }
+  td.t { font-family:var(--sans); white-space:normal; color:var(--muted); }
+  .num { text-align:right; }
+  caption { caption-side:bottom; text-align:left; font-size:12.5px; color:var(--faint); padding-top:8px; font-style:italic; }
+
+  .results { display:flex; flex-wrap:wrap; gap:0; border:1px solid var(--rule); border-radius:4px; margin:20px 0; overflow:hidden; }
+  .results .r { flex:1 1 150px; padding:15px 18px; border-right:1px solid var(--rule); }
+  .results .r:last-child { border-right:none; }
+  .results .v { font-family:var(--mono); font-size:25px; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1; }
+  .results .v .u { font-size:14px; color:var(--muted); }
+  .results .l { font-size:12.5px; color:var(--muted); margin-top:6px; line-height:1.35; }
+  .results .r.key .v { color:var(--accent); }
+
+  pre { background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:12px 14px; overflow-x:auto; margin:14px 0; }
+  code { font-family:var(--mono); font-size:13px; color:var(--ink); }
+  p code, li code { background:var(--surface); border:1px solid var(--rule); padding:.5px 4px; border-radius:3px; font-size:13px; }
+
+  figure { margin:20px 0; }
+  .fig-img { display:block; width:100%; height:auto; border:1px solid var(--rule); border-radius:4px; background:#fff; }
+  .fig-col { display:flex; flex-direction:column; gap:16px; }
+  .fig-lbl { font-family:var(--mono); font-size:12px; color:var(--accent); font-weight:600; margin-bottom:5px; }
+  figcaption { font-size:12.5px; color:var(--faint); margin-top:8px; font-style:italic; }
+
+  .proj-specs { display:flex; flex-wrap:wrap; gap:4px 20px; font-family:var(--mono); font-size:12.5px; color:var(--muted); margin:6px 0 12px; }
+  .proj-specs b { color:var(--ink); font-weight:600; }
+  ul.tight { margin:6px 0 0; padding-left:18px; }
+  ul.tight li { margin-bottom:6px; }
+  .appendix-tag { font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); border:1px solid var(--rule); padding:1px 7px; border-radius:20px; vertical-align:middle; }
+
+  footer { margin-top:56px; padding-top:22px; border-top:1px solid var(--rule); font-family:var(--mono); font-size:12.5px; color:var(--faint); }
+  @media (prefers-reduced-motion:no-preference){ a{ transition:border-color .15s, color .15s; } }
+
+  @media print {
+    :root { --paper:#fff; --surface:#fff; --ink:#111; --muted:#444; --faint:#777; --rule:#ccc; --accent:#0E7C86; --accent-soft:#eef5f5; }
+    body { font-size:11pt; }
+    .wrap { padding:0; max-width:none; }
+    section, .results, .tbl-scroll, figure, pre { page-break-inside:avoid; }
+    a { color:#111; border:none; }
+  }
+</style>
+
+  <style>
+    html { background: var(--paper); }
+    .site-controls {
+      position: fixed; top: 14px; right: 14px; z-index: 50;
+      display: flex; gap: 8px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      display: flex;
-      min-height: 100vh;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+    .site-controls button {
+      font-family: var(--mono); font-size: 12px; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+      padding: 6px 10px; cursor: pointer; line-height: 1;
+      transition: border-color .15s, color .15s;
     }
-    main { width: 100%; max-width: 640px; }
-    .eyebrow {
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-    h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
-    .tagline { font-size: 1.1rem; color: var(--muted); margin-top: 12px; }
-    .divider { height: 1px; background: var(--line); margin: 32px 0; border: 0; }
-    p { color: var(--fg); }
-    .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-    .links a {
-      display: inline-block;
-      padding: 10px 18px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--fg);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: border-color 0.15s ease, transform 0.15s ease;
-    }
-    .links a:hover { border-color: var(--accent); transform: translateY(-1px); }
-    footer { margin-top: 48px; font-size: 0.85rem; color: var(--muted); }
+    .site-controls button:hover { color: var(--accent); border-color: var(--accent); }
+    .site-controls button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @media print { .site-controls { display: none; } }
+    @media (max-width: 520px) { .site-controls { top: 8px; right: 8px; } }
   </style>
 </head>
 <body>
-  <main>
-    <div class="eyebrow">Kiheon Lim &middot; 임기헌</div>
-    <h1>안녕하세요.</h1>
-    <p class="tagline">전자공학을 공부하고, 로봇·AI 인프라를 만드는 사람입니다.</p>
-    <hr class="divider" />
-    <p>
-      HKUST 전자컴퓨터공학, RLWRLD 기술 전략.
-      하드웨어부터 배포까지 — 이해하고, 직접 만들어 세상에 올립니다.
-    </p>
-    <div class="links">
-      <a href="https://github.com/jkhlim125">GitHub</a>
-      <a href="mailto:jason.lim@rlwrld.ai">Email</a>
+
+  <div class="site-controls">
+    <button id="themeBtn" type="button" aria-label="Toggle light or dark theme">theme</button>
+    <button id="printBtn" type="button" aria-label="Save as PDF">save PDF</button>
+  </div>
+
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Engineering Portfolio</div>
+    <h1>Kiheon&nbsp;Lim</h1>
+    <p class="tagline">I build hardware-aware systems, measure how they actually behave, and let the measurements decide the design.</p>
+    <div class="focus-line">Focus — computer architecture &amp; AI-hardware acceleration: FPGA-oriented model efficiency, LUT/RTL datapaths, and cycle-level trade-offs.</div>
+    <div class="meta">
+      <span>Electronic Engineering · HKUST</span>
+      <a href="https://github.com/jkhlim125">github.com/jkhlim125</a>
+      <a href="https://www.linkedin.com/in/kiheon-lim-67a047383">LinkedIn</a>
+      <a href="mailto:kiheon2004@gmail.com">kiheon2004@gmail.com</a>
     </div>
-    <footer>이 페이지는 GitHub Pages로 배포되었습니다.</footer>
-  </main>
+  </header>
+
+  <!-- ================= FEATURED ================= -->
+  <section class="featured">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2>Hardware-efficient LUT neural networks for FPGAs</h2>
+    </div>
+    <p class="lede">UROP1100 · Advisor: Prof. Wei Zhang, HKUST · PyTorch · CIFAR-10 + RadioML</p>
+
+    <div class="body-col">
+      <p>On an FPGA the unit of compute is a lookup table, not a multiplier — yet networks are usually trained as if they'll run on a CPU and quantized only afterward. I worked on the alternative: training where hardware cost (pruned fan-in, packable structure) is part of the objective, then measuring what that costs in accuracy. Two parts — first characterizing an existing LUT-CNN framework, then porting it to a new signal domain.</p>
+
+      <h3><span class="k">Part A — CIFAR-10</span>Fixing the pruning, then mapping the accuracy–hardware frontier</h3>
+      <p>I reverse-engineered an existing LUT-CNN training/pruning pipeline; my contribution was the analysis layer — a pruning-correctness fix and a 40+ run sweep of the trade-off. The fix: global sensitivity pruning silently missed its sparsity target whenever weight scores <em>tied</em> at the threshold.</p>
+
+      <div class="results">
+        <div class="r key"><div class="v">691</div><div class="l">target prune count — tie-aware selection hits it exactly (error 0)</div></div>
+        <div class="r"><div class="v">682</div><div class="l">naive selection: −9 short, because 28 weights tied at the 0.18 threshold</div></div>
+      </div>
+
+      <p>With pruning correct, I swept sparsity × pack-ratio. The prepared frontier <strong>dominates the naive baseline at every pin-reduction level</strong> (Spearman ρ = −0.96, p &lt; 1e-4): aggressive configs reach ≈86% pin / ≈81% slice reduction, and the best run holds <strong>80.96% accuracy at 84% pin / 71% slice reduction</strong>.</p>
+      <figure>
+        <img class="fig-img" src="assets/cifar_pareto.jpg" alt="Pareto frontier of maximum test accuracy versus pin reduction rate; the green pruning-prepared frontier stays above the blue naive baseline across the whole range">
+        <figcaption>Green (pruning + pairing prepared) sits above blue (naive baseline) everywhere — same hardware saving, more accuracy retained.</figcaption>
+      </figure>
+
+      <h3><span class="k">Part B — RadioML 1-D IQ</span>Understand the task, then port the workflow to it</h3>
+      <p>Before touching LUTs I built a conventional 1-D CNN baseline (~60–62%; a two-branch IQ + instantaneous-frequency fusion was best at 61.9%) and ran failure analysis to see what the task actually needs.</p>
+      <figure>
+        <img class="fig-img" src="assets/radioml_heatmap.jpg" alt="Left: class-by-SNR accuracy heatmap, red at low SNR turning green above +6 dB. Right: row-normalized confusion matrix showing AM-SSB absorbing many classes and WBFM leaking into AM-DSB">
+        <figcaption>Accuracy is SNR-bound (near-chance below −6 dB, 95%+ above +6 dB). Errors are structured: AM-SSB acts as an attractor that absorbs other classes (~72% sink rate); WBFM leaks into AM-DSB. The hard classes are the ones that need fine amplitude/phase detail.</figcaption>
+      </figure>
+
+      <p>Then I ported the hardware-aware workflow to LUT operators: bitplane IQ preprocessing, <code>LUTQuant1d</code>/<code>LUTConv1d</code>, a 6-stage residual backbone, and — critically — <strong>conv and activation hardening decoupled</strong>, forcing binary activations only after every conv layer hardens (enabling them early collapsed training). The schedule is ordered by the hardware transition: prune while soft → recover → harden.</p>
+      <p>The key experiment is an ablation — same hardening flow, pruning-side prep (pairing + BIB + pruning + recovery) on vs. off:</p>
+      <div class="results">
+        <div class="r key"><div class="v">40<span class="u">%</span></div><div class="l">Final test acc — pruning-first, fully hardened</div></div>
+        <div class="r"><div class="v">29<span class="u">%</span></div><div class="l">Final test acc — no-prune control, same flow</div></div>
+        <div class="r"><div class="v">61.1<span class="u">%</span></div><div class="l">Best validation acc (epoch 37, soft regime)</div></div>
+      </div>
+      <figure>
+        <div class="fig-col">
+          <div><div class="fig-lbl">No-prune control → 29%</div><img class="fig-img" src="assets/train_control.jpg" alt="Validation accuracy and loss vs epoch for the no-prune control; accuracy plateaus near 60% then collapses to ~29% after epoch 170"></div>
+          <div><div class="fig-lbl">Pruning-first → 40%</div><img class="fig-img" src="assets/train_pruning.jpg" alt="Validation accuracy and loss vs epoch for the pruning-first run; plateaus near 60% then declines to ~40% after epoch 170"></div>
+        </div>
+        <figcaption>Both hold ~60% through pruning and conv hardening. At activation hardening (~epoch 170) the control craters to 29%; the prepared run holds 40% — a +11-point gap from structural preparation.</figcaption>
+      </figure>
+      <p>Pruning removed real structure — layer-wise mask sparsity rises 0.23 → 0.42 across depth — giving ≈38% input-pin pruning and an estimated ~31% slice reduction:</p>
+      <div class="tbl-scroll">
+        <table>
+          <caption>Layer-wise mask sparsity after pruning. Later layers tolerate more.</caption>
+          <thead><tr><th>Layer</th><th class="num">conv0</th><th class="num">conv1</th><th class="num">conv7</th><th class="num">conv8</th><th class="num">conv13</th><th class="num">conv14</th></tr></thead>
+          <tbody><tr><td class="t" style="color:var(--faint)">sparsity</td><td class="num">0.23</td><td class="num">0.29</td><td class="num">0.28</td><td class="num">0.33</td><td class="num">0.37</td><td class="num">0.42</td></tr></tbody>
+        </table>
+      </div>
+
+      <p>The LUT model's own class behavior confirms the diagnosis — after full hardening it fails on exactly the classes the baseline analysis flagged:</p>
+      <figure>
+        <img class="fig-img" src="assets/lut_confusion.jpg" alt="Row-normalized confusion matrix for the pruned, fully hardened RadioML LUT-CNN; AM-SSB collapses to 6 percent with 68 percent misread as WBFM, and the WBFM column absorbs the analog classes">
+        <figcaption>Pruned + fully hardened LUT-CNN (diagonal = per-class accuracy, overall ~40%). AM-SSB collapses to 6% (68% misread as WBFM); WBFM absorbs the analog classes; QAM16↔QAM64 confuse. It breaks on the same fine-amplitude/phase classes — the bottleneck is representational, not just optimization.</figcaption>
+      </figure>
+
+      <h3><span class="k">What breaks &amp; what's next</span>The bottleneck is the late binary transition</h3>
+      <ul class="tight">
+        <li>Robust to pruning and conv hardening; accuracy drops only at activation hardening (~epoch 170). The failure analysis explains why — hard binary activations destroy exactly the amplitude/phase gradations AM-SSB, WBFM and QAM depend on.</li>
+        <li><strong>Next:</strong> stabilize the late high-τ regime; sweep sparsity / pack-ratio (RadioML tested at one config so far).</li>
+        <li>Packing numbers are analytical (Union-5 constraint) — FPGA synthesis is the honest next step.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= SUPPORTING ================= -->
+  <section>
+    <div class="sec-head"><span class="sec-no">02</span><h2>Systolic array accelerator</h2></div>
+    <p class="lede">Verilog + Python · 4×4 array · VCD + trace verification</p>
+    <div class="body-col">
+      <div class="proj-specs"><span>Array <b>4×4</b></span><span>Latency <b>13 vs 12 cyc</b></span><span>Verify <b>VCD + trace.csv</b></span></div>
+      <p>Full 4×4 array — controller (FSM <code>IDLE→LOAD→STREAM→DRAIN→COLLECT→DONE</code>), loader, PE mesh, collector, testbench. Measured latency is 13 cycles vs a theoretical 12; the extra cycle is control overhead, <em>measured</em> rather than assumed. A <code>trace.csv</code> replay recovers the dataflow beyond raw waveforms.</p>
+      <figure>
+        <img class="fig-img" src="assets/systolic_wave.jpg" alt="Heatmap of MAC activity across the 16 processing elements over run-local cycles, showing a diagonal wavefront through the 4x4 array">
+        <figcaption>MAC activity sweeps diagonally across the 16 PEs — the systolic wavefront, reconstructed from the per-PE fire mask in <code>trace.csv</code>.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-no">03</span><h2>LUT vs MAC inference pipeline</h2></div>
+    <p class="lede">Verilog · controlled datapath comparison · event-based latency</p>
+    <div class="body-col">
+      <p>Two inference datapaths, identical inputs and control, isolating one added MAC register. Latency is read from real signal events (<code>out_valid</code> rising edge minus <code>in_valid</code>), not assumed depth. Result: <strong>LUT 4 cycles, MAC 5 — the same +1 across all 18 runs</strong>, traceable to exactly one pipeline register.</p>
+      <figure>
+        <img class="fig-img" src="assets/lutmac_latency.png" alt="GTKWave capture showing latency_lut settling to 4 and latency_mac to 5, with out_valid_lut asserting one cycle before out_valid_mac">
+        <figcaption>Event-based measurement: <code>latency_lut = 4</code>, <code>latency_mac = 5</code> — the MAC's <code>out_valid</code> lands one cycle later.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-no">04</span><h2>Constraint-aware design-space tool <span class="appendix-tag">deployed tool</span></h2></div>
+    <p class="lede">Python · Streamlit · pandas — turns experiment/RTL outputs into design decisions</p>
+    <div class="body-col">
+      <p>A workflow that filters infeasible configs first, reduces the rest to a Pareto frontier, then gives an explainable recommendation and sensitivity sweep — constraint-first, not blind scoring. <a href="https://hardware-aware-neural-network-trade-off-analysis-dashboard-esw.streamlit.app">Live app →</a></p>
+      <figure>
+        <img class="fig-img" src="assets/tool_ui.jpg" alt="Screenshot of the deployed Streamlit decision tool showing data input, constraints, and the feasible-candidate view">
+        <figcaption>The deployed dashboard (shown on sample data). Ingests CSV/JSON/RTL-derived results → feasibility filter → Pareto → recommendation.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-no">05</span><h2>Earlier foundation — UROP1000</h2></div>
+    <p class="lede">Open-source digital IC design flow · Verilog HDL</p>
+    <div class="body-col">
+      <p>Designed FSM-based logic (clocked adder, digital lock) in Verilog and took an RTL-to-GDS design through synthesis and place-and-route on the <strong>Tiny Tapeout</strong> platform — first hands-on exposure to the full hardware flow behind the RTL work above.</p>
+    </div>
+  </section>
+
+  <footer>
+    Tools — Verilog HDL · PyTorch · Python · C++ · GTKWave · Streamlit · NumPy · Git &nbsp;·&nbsp; Full coursework, GPA, and awards in CV.
+  </footer>
+
+</div>
+
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved) root.setAttribute('data-theme', saved);
+      function current() {
+        var attr = root.getAttribute('data-theme');
+        if (attr) return attr;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.getElementById('themeBtn').addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+      document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
+    })();
+  </script>
 </body>
 </html>
