@@ -37,7 +37,19 @@
       <div class="r"><div class="v">12<span class="u"> cyc</span></div><div class="l">Theoretical — the extra cycle is control overhead, measured not assumed</div></div>
     </div>
 
-    <p>Correctness shows up directly in the trace: the per-PE MAC-fire mask advances diagonally (<code>0001 → 0013 → 0137 → 137f → 37fe → 7fec → fec8 …</code>), i.e. the systolic wavefront sweeping across the array. Each PE gates accumulation on operand validity (<code>enable &amp;&amp; a_valid &amp;&amp; b_valid</code>), so only aligned data contributes.</p>
+    <p>Correctness shows up directly in the trace: the per-PE MAC-fire mask advances diagonally (<code>0001 → 0013 → 0137 → 137f → 37fe → 7fec → fec8 …</code>), i.e. the systolic wavefront sweeping across the array. Each PE gates accumulation on operand validity, so only aligned data contributes.</p>
+
+    <div class="code">
+      <div class="fname">rtl/pe.v</div>
+      <pre class="snippet"><code>// A MAC is meaningful only when compute is enabled and both operands are valid.
+assign mac_fire = enable &amp;&amp; a_valid_in &amp;&amp; b_valid_in;
+
+always @(posedge clk) begin
+    if (clear_acc)      psum_out &lt;= 0;                       // start a new output window
+    else if (mac_fire)  psum_out &lt;= psum_out + a_in * b_in;  // output-stationary accumulate
+end</code></pre>
+      <div class="cap">Output-stationary PE: the partial sum stays local while operands move, and only fires on aligned, valid data — which is what makes the wavefront clean.</div>
+    </div>
 
     <figure>
       <img class="fig-img" src="/assets/systolic_wave.jpg" alt="Heatmap of MAC activity across the 16 processing elements over run-local cycles, showing a diagonal wavefront through the 4x4 array" />

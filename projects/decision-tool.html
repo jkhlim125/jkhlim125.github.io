@@ -29,7 +29,20 @@
       <p class="lede">Python · Streamlit · pandas — turns experiment/RTL outputs into design decisions</p>
     </header>
 
-    <p>A workflow that reflects how hardware decisions are actually made: it filters infeasible configurations <strong>first</strong>, reduces the rest to a Pareto frontier, then gives an explainable recommendation and a sensitivity sweep — constraint-first, not blind scoring. Dominance is exact: no worse on every objective, strictly better on at least one. It ingests heterogeneous inputs (CSV / JSON / RTL-derived) into one candidate schema and stays robust to missing metrics.</p>
+    <p>A workflow that reflects how hardware decisions are actually made: it filters infeasible configurations <strong>first</strong>, reduces the rest to a Pareto frontier, then gives an explainable recommendation and a sensitivity sweep — constraint-first, not blind scoring. It ingests heterogeneous inputs (CSV / JSON / RTL-derived) into one candidate schema and stays robust to missing metrics.</p>
+
+    <div class="code">
+      <div class="fname">analysis_engine.py — Pareto dominance</div>
+      <pre class="snippet"><code>def _dominates(a, b, objectives, directions):
+    strictly_better = False
+    for obj, direction in zip(objectives, directions):
+        better = a[obj] &gt; b[obj] if direction == "maximize" else a[obj] &lt; b[obj]
+        worse  = a[obj] &lt; b[obj] if direction == "maximize" else a[obj] &gt; b[obj]
+        if worse:  return False        # worse on any objective → does not dominate
+        if better: strictly_better = True
+    return strictly_better             # no worse anywhere, strictly better somewhere</code></pre>
+      <div class="cap">The exact dominance rule behind the frontier — the tool keeps only candidates nothing else dominates, so the Pareto set is defensible rather than a weighted guess.</div>
+    </div>
 
     <p style="margin:18px 0;">
       <a href="https://hardware-aware-neural-network-trade-off-analysis-dashboard-esw.streamlit.app" style="font-family:var(--mono);font-size:14px;border:1px solid var(--accent);border-radius:6px;padding:9px 16px;display:inline-block;">Open the live app →</a>

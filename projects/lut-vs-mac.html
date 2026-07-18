@@ -39,6 +39,15 @@
 
     <p>The same +1 across all 18 runs, traceable to exactly one pipeline register in the MAC scoring datapath. A small result, but a cleanly controlled and verified one — and a demonstration that latency has to be <em>measured</em> from real events, not inferred from designed depth.</p>
 
+    <div class="code">
+      <div class="fname">tb/inference_top_tb.v</div>
+      <pre class="snippet"><code>// Latency = cycle of out_valid rising edge − cycle of in_valid rising edge.
+if (in_valid       &amp;&amp; !in_valid_d)       in_cycle    = cycle_now;
+if (out_valid_lut  &amp;&amp; !out_valid_lut_d)  latency_lut = cycle_now - in_cycle;  // = 4
+if (out_valid_mac  &amp;&amp; !out_valid_mac_d)  latency_mac = cycle_now - in_cycle;  // = 5</code></pre>
+      <div class="cap">Edge-detected, one transaction per run — the measurement watches real signal events rather than trusting the designed pipeline depth.</div>
+    </div>
+
     <figure>
       <img class="fig-img" src="/assets/lutmac_overview.png" alt="GTKWave overview of both pipelines: staged valid signals propagate through LUT and MAC paths, with the MAC output valid arriving one cycle after the LUT output" />
       <figcaption>Both datapaths run together from the same input: the staged <code>valid</code> signals propagate in lockstep, and <code>out_valid_mac</code> trails <code>out_valid_lut</code> by one cycle.</figcaption>

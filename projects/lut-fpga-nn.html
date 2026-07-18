@@ -40,6 +40,20 @@
       <div class="r"><div class="v">682</div><div class="l">naive selection: −9 short, because 28 weights tied at the 0.18 threshold</div></div>
     </div>
 
+    <div class="code">
+      <div class="fname">LutNet/analysis_code/check_pruning_consistency.py</div>
+      <pre class="snippet"><code>def improved_keep_mask(scores, threshold, target_prune_count):
+    below, ties, _ = threshold_partition(scores, threshold)  # split &lt;, ==, &gt;
+    keep = np.ones(scores.size, bool)
+    keep[below] = False
+
+    need_more = target_prune_count - int(below.sum())   # 691 − 682 = 9 still owed
+    tie_idx   = np.where(ties)[0]
+    keep[tie_idx[:need_more]] = False   # take exactly `need_more` from the tie region
+    return keep                         # hits the target instead of stopping 9 short</code></pre>
+      <div class="cap">The fix in one function: prune everything below the threshold, then take exactly the remaining count from the tie region — so target sparsity is met, not approximated.</div>
+    </div>
+
     <p>With pruning correct, I swept sparsity × pack-ratio. The prepared frontier <strong>dominates the naive baseline at every pin-reduction level</strong> (Spearman ρ = −0.96, p &lt; 1e-4): aggressive configs reach ≈86% pin / ≈81% slice reduction, and the best run holds <strong>80.96% accuracy at 84% pin / 71% slice reduction</strong>.</p>
     <figure>
       <img class="fig-img" src="/assets/cifar_pareto.jpg" alt="Pareto frontier of maximum test accuracy versus pin reduction; the green pruning-prepared frontier stays above the blue naive baseline across the whole range" />

@@ -134,6 +134,17 @@ figcaption { font-size:12.5px; color:var(--faint); margin-top:8px; font-style:it
 .fig-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 @media (max-width:640px){ .fig-2 { grid-template-columns:1fr; } }
 
+/* about (home) */
+.about p { max-width:68ch; color:var(--ink); }
+.about p + p { margin-top:0; }
+
+/* code snippets */
+.code { margin:18px 0; }
+.code .fname { font-family:var(--mono); font-size:11.5px; color:var(--faint); margin-bottom:6px; }
+pre.snippet { background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:14px 16px; overflow-x:auto; margin:0; }
+pre.snippet code { font-family:var(--mono); font-size:12.5px; line-height:1.55; color:var(--ink); white-space:pre; background:none; border:none; padding:0; }
+.code .cap { font-size:12.5px; color:var(--faint); margin-top:8px; font-style:italic; }
+
 .proj-specs { display:flex; flex-wrap:wrap; gap:4px 20px; font-family:var(--mono); font-size:12.5px; color:var(--muted); margin:14px 0 6px; }
 .proj-specs b { color:var(--ink); font-weight:600; }
 
